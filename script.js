@@ -1,6 +1,7 @@
 const API_KEY = "fbf821b89d8842b58faad35480bf5519";
 const url = "https://newsapi.org/v2/everything?q=";
-const proxyurl="https://vegeksnews.vercel.app/"
+const corsProxyUrl = "https://cors-anywhere.herokuapp.com/";
+
 
 window.addEventListener("load", () => fetchNews("India"));
 
@@ -9,6 +10,7 @@ function reload() {
 }
 
 async function fetchNews(query) {
+    
     const res = await fetch(`${url}${query}&sortBy=publishedAt&apiKey=${API_KEY}`);
     const data = await res.json();
     bindData(data.articles);
