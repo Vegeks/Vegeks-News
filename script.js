@@ -1,5 +1,6 @@
 const API_KEY = "fbf821b89d8842b58faad35480bf5519";
 const url = "https://newsapi.org/v2/everything?q=";
+const proxyurl="https://vegeksnews.vercel.app/"
 
 window.addEventListener("load", () => fetchNews("India"));
 
