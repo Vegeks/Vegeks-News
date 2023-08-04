@@ -1,5 +1,5 @@
 const API_KEY = "fbf821b89d8842b58faad35480bf5519";
-const url = "https://newsapi.org/v2/everything?q=";
+const url = "https://api.newscatcherapi.com/v2/search?q=";
 const corsProxyUrl = "https://cors-anywhere.herokuapp.com/";
 
 
@@ -10,8 +10,11 @@ function reload() {
 }
 
 async function fetchNews(query) {
-    
-    const res = await fetch(`${url}${query}&sortBy=publishedAt&apiKey=${API_KEY}`);
+    const res = await fetch(`${url}${query}&lang=en&sort_by=date`, {
+        headers: {
+            'x-api-key': 'v2lN0AJS71bH7yYTtsis7u0nQ1s7pTBwqx6SxnZMmHo'
+        }
+    });
     const data = await res.json();
     bindData(data.articles);
 }
@@ -23,7 +26,7 @@ function bindData(articles) {
     cardsContainer.innerHTML = "";
 
     articles.forEach((article) => {
-        if (!article.urlToImage) return;
+        if (!article.media) return;
         const cardClone = newsCardTemplate.content.cloneNode(true);
         fillDataInCard(cardClone, article);
         cardsContainer.appendChild(cardClone);
@@ -36,18 +39,18 @@ function fillDataInCard(cardClone, article) {
     const newsSource = cardClone.querySelector("#news-source");
     const newsDesc = cardClone.querySelector("#news-desc");
 
-    newsImg.src = article.urlToImage;
+    newsImg.src = article.media;
     newsTitle.innerHTML = article.title;
-    newsDesc.innerHTML = article.description;
+    newsDesc.innerHTML = article.summary;
 
-    const date = new Date(article.publishedAt).toLocaleString("en-US", {
+    const date = new Date(article.published_date).toLocaleString("en-US", {
         timeZone: "Asia/Jakarta",
     });
 
-    newsSource.innerHTML = `${article.source.name} · ${date}`;
+    newsSource.innerHTML = `${article.author} · ${date}`;
 
     cardClone.firstElementChild.addEventListener("click", () => {
-        window.open(article.url, "_blank");
+        window.open(article.link, "_blank");
     });
 }
 
