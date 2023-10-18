@@ -8,6 +8,12 @@
     <title>News App</title>
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $.getJSON("https://api.ipify.org?format=json", function(data) {
+        console.log(data.ip);
+        })
+    </script>
 </head>
 <body>
 
