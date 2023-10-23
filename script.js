@@ -1,4 +1,4 @@
-const API_KEY = "sDHYTtxdWJsp30xvMwunnw_-tOjg-Jp62uMsy8Iijxc";
+
 const url = "https://api.newscatcherapi.com/v2/search?q=";
 const corsProxyUrl = "https://cors-anywhere.herokuapp.com/";
 
@@ -10,9 +10,10 @@ function reload() {
 }
 
 async function fetchNews(query) {
+    // console.log("im called");
     const res = await fetch(`${url}${query}&lang=en&sort_by=date`, {
         headers: {
-            'x-api-key': 'sDHYTtxdWJsp30xvMwunnw_-tOjg-Jp62uMsy8Iijxc'
+            'x-api-key': API_KEY
         }
     });
     const data = await res.json();
